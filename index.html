@@ -5,7 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Nagesh ToDo App</title>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+<script>
+  // Replace the following with your own Firebase config
+  var firebaseConfig = {
+  apiKey: "AIzaSyCb47xl6L7mjer_kfjQTAFFPYnGOPIvMYY",
+  authDomain: "testingnagesh-e068e.firebaseapp.com",
+  projectId: "testingnagesh-e068e",
+  storageBucket: "testingnagesh-e068e.appspot.com",
+  messagingSenderId: "824660160274",
+  appId: "1:824660160274:web:c396fbf589688ec49ccdcb",
+  measurementId: "G-3MTCFCQDH7"
+  };
 
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -26,6 +42,32 @@
       <!-- Input box -->
       <div class="col-md-7">
         <script src="todo.jpg"></script>
+<!-- Sign-up form -->
+<form>
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+  <button type="button" onclick="signUp()">Sign Up</button>
+</form>
+
+<script>
+  function signUp() {
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(function(userCredential) {
+        // Sign-up successful
+        var user = userCredential.user;
+        console.log("User signed up:", user);
+      })
+      .catch(function(error) {
+        // Handle sign-up errors
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log("Sign-up error:", errorCode, errorMessage);
+      });
+  }
+</script>
 
         <div class="form-group">
           <label for="inpNewTask">New Task</label>
